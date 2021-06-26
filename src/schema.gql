@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Trivia {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Round {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Question {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  trivia(id: Int!): Trivia!
+  round(id: Int!): Round!
+  question(id: Int!): Question!
+}
+
+type Mutation {
+  createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
+  updateTrivia(updateTriviaInput: UpdateTriviaInput!): Trivia!
+  removeTrivia(id: Int!): Trivia!
+  createRound(createRoundInput: CreateRoundInput!): Round!
+  updateRound(updateRoundInput: UpdateRoundInput!): Round!
+  removeRound(id: Int!): Round!
+  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
+  removeQuestion(id: Int!): Question!
+}
+
+input CreateTriviaInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTriviaInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateRoundInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRoundInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
