@@ -3,18 +3,16 @@
 # ------------------------------------------------------
 
 type Trivia {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  position: String!
 }
 
 type Round {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  position: Int!
 }
 
 type Question {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  prompt: String!
+  answer: String!
 }
 
 type Query {

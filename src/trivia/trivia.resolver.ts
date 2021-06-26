@@ -9,7 +9,9 @@ export class TriviaResolver {
   constructor(private readonly triviaService: TriviaService) {}
 
   @Mutation(() => Trivia)
-  createTrivia(@Args('createTriviaInput') createTriviaInput: CreateTriviaInput) {
+  createTrivia(
+    @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
+  ) {
     return this.triviaService.create(createTriviaInput);
   }
 
@@ -24,7 +26,9 @@ export class TriviaResolver {
   }
 
   @Mutation(() => Trivia)
-  updateTrivia(@Args('updateTriviaInput') updateTriviaInput: UpdateTriviaInput) {
+  updateTrivia(
+    @Args('updateTriviaInput') updateTriviaInput: UpdateTriviaInput,
+  ) {
     return this.triviaService.update(updateTriviaInput.id, updateTriviaInput);
   }
 
