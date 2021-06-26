@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Round } from 'src/round/entities/round.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 @ObjectType()
 export class Trivia {
@@ -9,4 +10,7 @@ export class Trivia {
   @Field()
   @Column()
   position: string;
+
+  @OneToMany(() => Round, (round) => round.trivia)
+  rounds: Round[];
 }
