@@ -9,7 +9,7 @@ export class Trivia {
 
   @Field()
   @Column()
-  position: string;
+  name: string;
 
   @OneToMany(() => Round, (round) => round.trivia)
   rounds: Round[];

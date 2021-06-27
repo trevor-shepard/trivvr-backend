@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Trivia {
-  position: String!
+  name: String!
 }
 
 type Round {
@@ -16,21 +16,32 @@ type Question {
 }
 
 type Query {
+  question(id: Int!): Question!
   trivia(id: Int!): Trivia!
   round(id: Int!): Round!
-  question(id: Int!): Question!
 }
 
 type Mutation {
+  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
+  removeQuestion(id: Int!): Question!
   createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
   updateTrivia(updateTriviaInput: UpdateTriviaInput!): Trivia!
   removeTrivia(id: Int!): Trivia!
   createRound(createRoundInput: CreateRoundInput!): Round!
   updateRound(updateRoundInput: UpdateRoundInput!): Round!
   removeRound(id: Int!): Round!
-  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
-  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
-  removeQuestion(id: Int!): Question!
+}
+
+input CreateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input CreateTriviaInput {
@@ -50,17 +61,6 @@ input CreateRoundInput {
 }
 
 input UpdateRoundInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
-input CreateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateQuestionInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
