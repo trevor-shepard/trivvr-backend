@@ -1,14 +1,14 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Question } from 'src/question/entities/question.entity';
+import { RoundToQuestion } from 'src/round-to-question/entities/round-to-question.entity';
 import { Trivia } from 'src/trivia/entities/trivia.entity';
 import {
   Column,
   Entity,
   ManyToOne,
-  JoinTable,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 @Entity()
 @ObjectType()
 export class Round {
@@ -22,7 +22,6 @@ export class Round {
   @ManyToOne(() => Trivia, (trivia) => trivia.rounds)
   trivia: Trivia;
 
-  @ManyToMany(() => Question, (question) => question.rounds)
-  @JoinTable()
-  questions: Question[];
+  @OneToMany(() => RoundToQuestion, (roundToQuestion) => roundToQuestion.round)
+  public roundToQuestion!: RoundToQuestion[];
 }

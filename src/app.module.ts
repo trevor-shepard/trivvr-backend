@@ -11,6 +11,8 @@ import config from 'ormconfig';
 import { Trivia } from './trivia/entities/trivia.entity';
 import { Round } from './round/entities/round.entity';
 import { Question } from './question/entities/question.entity';
+import { RoundToQuestionModule } from './round-to-question/round-to-question.module';
+import { RoundToQuestion } from './round-to-question/entities/round-to-question.entity';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { Question } from './question/entities/question.entity';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TypeOrmModule.forRoot(config),
-    TypeOrmModule.forFeature([Question, Trivia, Round]),
+    TypeOrmModule.forFeature([Question, Trivia, Round, RoundToQuestion]),
     QuestionModule,
     TriviaModule,
     RoundModule,
+    RoundToQuestionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

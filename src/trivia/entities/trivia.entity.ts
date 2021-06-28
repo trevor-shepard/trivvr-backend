@@ -11,6 +11,10 @@ export class Trivia {
   @Column()
   name: string;
 
+  @Field()
+  @Column()
+  game_status: string;
+
   @OneToMany(() => Round, (round) => round.trivia)
   rounds: Round[];
 }
