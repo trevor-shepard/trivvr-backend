@@ -19,33 +19,30 @@ export class AppService {
   async seed() {
     const trivia = this.triviaRepo.create({
       name: 'seeded trivia',
+      game_status: 'incomplete'
     });
     const rounds = [];
+    
     for (const roundIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
       const round = this.roundRepo.create({ position: roundIndex });
       const roundToQuestions = [];
       for (const questionIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
         const prompt = `What is ${roundIndex} + ${questionIndex}`;
         const answer = `${roundIndex + questionIndex}`;
-        console.log('prompt: answer', prompt, answer);
-        const question = this.questionRepo.create({
+        const question = await this.questionRepo.create({
           prompt,
           answer,
         });
-        const roundToQuestion = this.roundToQuestionRepo.create({
+
+        const roundToQuestion = await this.roundToQuestionRepo.create({
           position: questionIndex,
           question,
           round,
         });
 
-        question.roundToQuestion = [
-          ...question.roundToQuestion,
-          roundToQuestion,
-        ];
+        await this.questionRepo.save(question);
 
-        this.questionRepo.save(question);
-
-        this.roundToQuestionRepo.save(roundToQuestion);
+        await this.roundToQuestionRepo.save(roundToQuestion);
       }
 
       round.roundToQuestion = roundToQuestions;
