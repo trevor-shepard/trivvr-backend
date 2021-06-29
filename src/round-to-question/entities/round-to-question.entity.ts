@@ -14,12 +14,12 @@ export class RoundToQuestion {
   public position!: number;
 
   @ManyToOne(() => Question, (question) => question.roundToQuestion, {
-    cascade: true
+    cascade: true,
   })
   public question!: Question;
 
   @ManyToOne(() => Round, (round) => round.roundToQuestion, {
-    cascade: true
+    cascade: true,
   })
   public round!: Round;
 }

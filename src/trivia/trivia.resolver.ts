@@ -8,32 +8,33 @@ import { UpdateTriviaInput } from './dto/update-trivia.input';
 export class TriviaResolver {
   constructor(private readonly triviaService: TriviaService) {}
 
-  @Mutation(() => Trivia)
-  createTrivia(
-    @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
-  ) {
-    return this.triviaService.create(createTriviaInput);
-  }
+  // TODO
+  // @Mutation(() => Trivia)
+  // createTrivia(
+  //   @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
+  // ) {
+  //   return this.triviaService.create(createTriviaInput);
+  // }
 
-  @Query(() => [Trivia], { name: 'trivia' })
-  findAll() {
-    return this.triviaService.findAll();
-  }
+  // @Query(() => [Trivia], { name: 'trivia' })
+  // findAll() {
+  //   return this.triviaService.findAll();
+  // }
 
-  @Query(() => Trivia, { name: 'trivia' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.triviaService.findOne(id);
-  }
+  // @Query(() => Trivia, { name: 'trivia' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.triviaService.findOne(id);
+  // }
 
-  @Mutation(() => Trivia)
-  updateTrivia(
-    @Args('updateTriviaInput') updateTriviaInput: UpdateTriviaInput,
-  ) {
-    return this.triviaService.update(updateTriviaInput.id, updateTriviaInput);
-  }
+  // @Mutation(() => Trivia)
+  // updateTrivia(
+  //   @Args('updateTriviaInput') updateTriviaInput: UpdateTriviaInput,
+  // ) {
+  //   return this.triviaService.update(updateTriviaInput.id, updateTriviaInput);
+  // }
 
-  @Mutation(() => Trivia)
-  removeTrivia(@Args('id', { type: () => Int }) id: number) {
-    return this.triviaService.remove(id);
-  }
+  // @Mutation(() => Trivia)
+  // removeTrivia(@Args('id', { type: () => Int }) id: number) {
+  //   return this.triviaService.remove(id);
+  // }
 }

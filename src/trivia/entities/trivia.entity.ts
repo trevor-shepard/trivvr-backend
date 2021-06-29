@@ -1,6 +1,14 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Round } from 'src/round/entities/round.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
 @Entity()
 @ObjectType()
 export class Trivia {
@@ -17,4 +25,7 @@ export class Trivia {
 
   @OneToMany(() => Round, (round) => round.trivia)
   rounds: Round[];
+
+  @ManyToMany(() => User, { cascade: true })
+  admins: User[];
 }

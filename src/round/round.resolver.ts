@@ -8,28 +8,28 @@ import { UpdateRoundInput } from './dto/update-round.input';
 export class RoundResolver {
   constructor(private readonly roundService: RoundService) {}
 
-  @Mutation(() => Round)
-  createRound(@Args('createRoundInput') createRoundInput: CreateRoundInput) {
-    return this.roundService.create(createRoundInput);
-  }
+  // @Mutation(() => Round)
+  // createRound(@Args('createRoundInput') createRoundInput: CreateRoundInput) {
+  //   return this.roundService.create(createRoundInput);
+  // }
 
-  @Query(() => [Round], { name: 'round' })
-  findAll() {
-    return this.roundService.findAll();
-  }
+  // @Query(() => [Round], { name: 'round' })
+  // findAll() {
+  //   return this.roundService.findAll();
+  // }
 
-  @Query(() => Round, { name: 'round' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.roundService.findOne(id);
-  }
+  // @Query(() => Round, { name: 'round' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.roundService.findOne(id);
+  // }
 
-  @Mutation(() => Round)
-  updateRound(@Args('updateRoundInput') updateRoundInput: UpdateRoundInput) {
-    return this.roundService.update(updateRoundInput.id, updateRoundInput);
-  }
+  // @Mutation(() => Round)
+  // updateRound(@Args('updateRoundInput') updateRoundInput: UpdateRoundInput) {
+  //   return this.roundService.update(updateRoundInput.id, updateRoundInput);
+  // }
 
-  @Mutation(() => Round)
-  removeRound(@Args('id', { type: () => Int }) id: number) {
-    return this.roundService.remove(id);
-  }
+  // @Mutation(() => Round)
+  // removeRound(@Args('id', { type: () => Int }) id: number) {
+  //   return this.roundService.remove(id);
+  // }
 }

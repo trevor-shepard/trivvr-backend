@@ -5,6 +5,7 @@ import { Question } from './question/entities/question.entity';
 import { RoundToQuestion } from './round-to-question/entities/round-to-question.entity';
 import { Round } from './round/entities/round.entity';
 import { Trivia } from './trivia/entities/trivia.entity';
+import { User } from './user/entities/user.entity';
 
 @Injectable()
 export class AppService {
@@ -14,49 +15,59 @@ export class AppService {
     @InjectRepository(Round) private roundRepo: Repository<Round>,
     @InjectRepository(RoundToQuestion)
     private roundToQuestionRepo: Repository<RoundToQuestion>,
+    @InjectRepository(User) private userRepo: Repository<User>,
   ) {}
 
-  async seed() {
-    const trivia = this.triviaRepo.create({
-      name: 'seeded trivia',
-      game_status: 'incomplete'
+  // async seed() {
+  //   const trivia = this.triviaRepo.create({
+  //     name: 'seeded trivia',
+  //     game_status: 'incomplete'
+  //   });
+  //   const rounds = [];
+
+  //   for (const roundIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+  //     const round = this.roundRepo.create({ position: roundIndex });
+  //     const roundToQuestions = [];
+  //     for (const questionIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+  //       const prompt = `What is ${roundIndex} + ${questionIndex}`;
+  //       const answer = `${roundIndex + questionIndex}`;
+  //       const question = await this.questionRepo.create({
+  //         prompt,
+  //         answer,
+  //       });
+
+  //       const roundToQuestion = await this.roundToQuestionRepo.create({
+  //         position: questionIndex,
+  //         question,
+  //         round,
+  //       });
+
+  //       await this.questionRepo.save(question);
+
+  //       await this.roundToQuestionRepo.save(roundToQuestion);
+  //     }
+
+  //     round.roundToQuestion = roundToQuestions;
+
+  //     await this.roundRepo.save(round);
+  //     rounds.push(round);
+  //   }
+
+  //   trivia.rounds = rounds;
+
+  //   await this.triviaRepo.save(trivia);
+  // }
+
+  async createUser() {
+    const user = this.userRepo.create({
+      username: 'hi',
+      email: 't@a.com',
     });
-    const rounds = [];
-    
-    for (const roundIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
-      const round = this.roundRepo.create({ position: roundIndex });
-      const roundToQuestions = [];
-      for (const questionIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
-        const prompt = `What is ${roundIndex} + ${questionIndex}`;
-        const answer = `${roundIndex + questionIndex}`;
-        const question = await this.questionRepo.create({
-          prompt,
-          answer,
-        });
 
-        const roundToQuestion = await this.roundToQuestionRepo.create({
-          position: questionIndex,
-          question,
-          round,
-        });
-
-        await this.questionRepo.save(question);
-
-        await this.roundToQuestionRepo.save(roundToQuestion);
-      }
-
-      round.roundToQuestion = roundToQuestions;
-
-      await this.roundRepo.save(round);
-      rounds.push(round);
-    }
-
-    trivia.rounds = rounds;
-
-    await this.triviaRepo.save(trivia);
+    await this.userRepo.save(user);
   }
 
-  getHello(): string {
-    return 'Hello World!';
-  }
+  // getHello(): string {
+  //   return 'Hello World!';
+  // }
 }

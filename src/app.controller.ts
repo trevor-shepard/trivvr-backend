@@ -7,7 +7,7 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<string> {
-    await this.appService.seed();
-    return 'seeded';
+    await this.appService.createUser();
+    return 'user created';
   }
 }

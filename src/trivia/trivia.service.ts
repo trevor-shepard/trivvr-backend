@@ -1,12 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateTriviaInput } from './dto/create-trivia.input';
 import { UpdateTriviaInput } from './dto/update-trivia.input';
+import { Trivia } from './entities/trivia.entity';
 
 @Injectable()
 export class TriviaService {
-  create(createTriviaInput: CreateTriviaInput) {
-    return 'This action adds a new trivia';
-  }
+  constructor(
+    @InjectRepository(Trivia) private triviaRepo: Repository<Trivia>,
+  ) {}
+
+  // TODO
+  // async create(createTriviaInput: CreateTriviaInput) {
+  //   const { name, userID } = createTriviaInput
+
+  //   const trivia = this.triviaRepo.create({
+
+  //   })
+
+  // }
 
   findAll() {
     return `This action returns all trivia`;

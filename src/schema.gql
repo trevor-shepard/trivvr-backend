@@ -2,77 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Trivia {
-  name: String!
-  game_status: String!
-}
-
-type Round {
-  position: Int!
+type User {
+  id: Float!
+  username: String!
+  email: String!
 }
 
 type RoundToQuestion {
   position: Int!
 }
 
-type Question {
-  prompt: String!
-  answer: String!
-}
-
 type Query {
-  question(id: Int!): Question!
-  trivia(id: Int!): Trivia!
-  round(id: Int!): Round!
   roundToQuestion(id: Int!): RoundToQuestion!
 }
 
 type Mutation {
-  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
-  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
-  removeQuestion(id: Int!): Question!
-  createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
-  updateTrivia(updateTriviaInput: UpdateTriviaInput!): Trivia!
-  removeTrivia(id: Int!): Trivia!
-  createRound(createRoundInput: CreateRoundInput!): Round!
-  updateRound(updateRoundInput: UpdateRoundInput!): Round!
-  removeRound(id: Int!): Round!
   createRoundToQuestion(createRoundToQuestionInput: CreateRoundToQuestionInput!): RoundToQuestion!
   updateRoundToQuestion(updateRoundToQuestionInput: UpdateRoundToQuestionInput!): RoundToQuestion!
   removeRoundToQuestion(id: Int!): RoundToQuestion!
-}
-
-input CreateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
-input CreateTriviaInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateTriviaInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
-input CreateRoundInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateRoundInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 input CreateRoundToQuestionInput {
@@ -84,4 +32,12 @@ input UpdateRoundToQuestionInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
+}
+
+input CreateUserInput {
+  """username"""
+  username: String!
+
+  """email"""
+  email: String!
 }
