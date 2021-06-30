@@ -8,13 +8,21 @@ import { UpdateTriviaInput } from './dto/update-trivia.input';
 export class TriviaResolver {
   constructor(private readonly triviaService: TriviaService) {}
 
-  // TODO
-  // @Mutation(() => Trivia)
-  // createTrivia(
-  //   @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
-  // ) {
-  //   return this.triviaService.create(createTriviaInput);
-  // }
+  @Query(() => [Trivia])
+  getAllUsersTrivia(@Args('id', { type: () => Int }) id: number) {
+    try {
+      return this.triviaService.findAllUsersTrivia(id);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  @Mutation(() => Trivia)
+  createTrivia(
+    @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
+  ) {
+    return this.triviaService.create(createTriviaInput);
+  }
 
   // @Query(() => [Trivia], { name: 'trivia' })
   // findAll() {

@@ -8,19 +8,33 @@ type User {
   email: String!
 }
 
+type Trivia {
+  id: Float!
+  name: String!
+  game_status: String!
+}
+
 type RoundToQuestion {
   position: Int!
 }
 
 type Query {
+  getAllUsersTrivia(id: Int!): [Trivia!]!
   roundToQuestion(id: Int!): RoundToQuestion!
 }
 
 type Mutation {
+  createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
   createRoundToQuestion(createRoundToQuestionInput: CreateRoundToQuestionInput!): RoundToQuestion!
   updateRoundToQuestion(updateRoundToQuestionInput: UpdateRoundToQuestionInput!): RoundToQuestion!
   removeRoundToQuestion(id: Int!): RoundToQuestion!
   createUser(createUserInput: CreateUserInput!): User!
+}
+
+input CreateTriviaInput {
+  """name of trivia"""
+  name: String!
+  userID: Int!
 }
 
 input CreateRoundToQuestionInput {

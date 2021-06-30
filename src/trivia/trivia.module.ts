@@ -10,15 +10,18 @@ import { RoundToQuestion } from 'src/round-to-question/entities/round-to-questio
 import { RoundToQuestionModule } from 'src/round-to-question/round-to-question.module';
 import { Round } from 'src/round/entities/round.entity';
 import { RoundModule } from 'src/round/round.module';
+import { User } from 'src/user/entities/user.entity';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(config),
-    TypeOrmModule.forFeature([Question, Trivia, Round, RoundToQuestion]),
+    TypeOrmModule.forFeature([Question, Trivia, Round, RoundToQuestion, User]),
     QuestionModule,
     TriviaModule,
     RoundModule,
     RoundToQuestionModule,
+    UserModule,
   ],
   providers: [TriviaResolver, TriviaService],
 })

@@ -5,6 +5,6 @@ export class CreateTriviaInput {
   @Field(() => String, { description: 'name of trivia' })
   name: string;
 
-  @Field()
-  userID: string;
+  @Field(() => Int)
+  userID: number;
 }
