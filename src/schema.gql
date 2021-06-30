@@ -12,14 +12,29 @@ type Trivia {
   id: Float!
   name: String!
   game_status: String!
+  rounds: [Round!]!
+  admins: [User!]!
+}
+
+type Round {
+  position: Int!
+  questions: [RoundToQuestion!]!
 }
 
 type RoundToQuestion {
   position: Int!
+  question: [Question!]!
+  round: [Round!]!
+}
+
+type Question {
+  prompt: String!
+  answer: String!
 }
 
 type Query {
   getAllUsersTrivia(id: Int!): [Trivia!]!
+  trivia(id: Int!): Trivia!
   roundToQuestion(id: Int!): RoundToQuestion!
 }
 

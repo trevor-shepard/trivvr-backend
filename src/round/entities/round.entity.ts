@@ -22,6 +22,7 @@ export class Round {
   @ManyToOne(() => Trivia, (trivia) => trivia.rounds)
   trivia: Trivia;
 
+  @Field(() => [RoundToQuestion], { name: 'questions'})
   @OneToMany(() => RoundToQuestion, (roundToQuestion) => roundToQuestion.round)
   public roundToQuestion!: RoundToQuestion[];
 }

@@ -47,9 +47,15 @@ export class TriviaService {
     return user.trivias;
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} trivia`;
-  // }
+  async findOne(id: number) {
+    return await this.triviaRepo.findOne(id, {
+      relations: [
+        'rounds',
+        'rounds.roundToQuestion',
+        'rounds.roundToQuestion.question',
+      ],
+    });
+  }
 
   // update(id: number, updateTriviaInput: UpdateTriviaInput) {
   //   return `This action updates a #${id} trivia`;

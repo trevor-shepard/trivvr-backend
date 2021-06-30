@@ -13,11 +13,13 @@ export class RoundToQuestion {
   @Column()
   public position!: number;
 
+  @Field(() => [Question])
   @ManyToOne(() => Question, (question) => question.roundToQuestion, {
     cascade: true,
   })
   public question!: Question;
 
+  @Field(() => [Round])
   @ManyToOne(() => Round, (round) => round.roundToQuestion, {
     cascade: true,
   })

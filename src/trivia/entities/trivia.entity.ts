@@ -25,9 +25,11 @@ export class Trivia {
   @Column()
   game_status: 'incomplete' | 'complete' | 'started' | 'finished';
 
+  @Field(() => [Round])
   @OneToMany(() => Round, (round) => round.trivia)
   rounds: Round[];
 
+  @Field(() => [User])
   @ManyToMany(() => User, (user) => user.trivias)
   @JoinTable()
   admins: User[];

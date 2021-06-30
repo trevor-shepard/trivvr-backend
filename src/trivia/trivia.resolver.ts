@@ -17,6 +17,11 @@ export class TriviaResolver {
     }
   }
 
+  @Query(() => Trivia, { name: 'trivia' })
+  findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.triviaService.findOne(id);
+  }
+
   @Mutation(() => Trivia)
   createTrivia(
     @Args('createTriviaInput') createTriviaInput: CreateTriviaInput,
@@ -27,11 +32,6 @@ export class TriviaResolver {
   // @Query(() => [Trivia], { name: 'trivia' })
   // findAll() {
   //   return this.triviaService.findAll();
-  // }
-
-  // @Query(() => Trivia, { name: 'trivia' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.triviaService.findOne(id);
   // }
 
   // @Mutation(() => Trivia)
