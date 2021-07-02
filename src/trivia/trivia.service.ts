@@ -44,10 +44,6 @@ export class TriviaService {
       relations: ['rounds', 'rounds.questions'],
     });
 
-    console.log('fetch trivia', trivia);
-
-    console.log('questions', trivia.rounds[0].questions);
-
     return trivia;
   }
 

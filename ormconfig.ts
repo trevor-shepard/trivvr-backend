@@ -5,7 +5,7 @@ const config: SqliteConnectionOptions = {
   database: '../db',
   entities: ['dist/**/*.entity.js'],
   synchronize: true,
-  logging: true,
+  logging: false,
 };
 
 export default config;

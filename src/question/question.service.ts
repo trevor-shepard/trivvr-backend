@@ -37,33 +37,42 @@ export class QuestionService {
       relations: ['questions'],
     });
 
-    if (position >= round.questions.length) {
+    const { questions } = round;
+
+    console.log(questions)
+
+    if (position >= questions.length) {
+      console.log('appending question to the end');
       const questionPosition = this.questionPositionRepo.create({
         round,
         question,
-        position: round.questions.length,
+        position: questions.length,
       });
       await this.questionPositionRepo.save(questionPosition);
     } else {
-      for (const questionPosition of round.questions) {
-        if (questionPosition.position > position) {
-          await this.questionRepo
-            .createQueryBuilder()
-            .update(QuestionPosition)
-            .set({
-              position: questionPosition.position + 1,
-            })
-            .where('id = :id', { id: questionPosition.positionId })
-            .execute();
-        }
-      }
-
+      console.log('appending question at position', position);
       const questionPosition = this.questionPositionRepo.create({
         round,
         question,
         position,
       });
       await this.questionPositionRepo.save(questionPosition);
+
+      questions.splice(position, 0, questionPosition);
+
+      for (const [i, q] of questions.entries()) {
+        await this.questionPositionRepo
+          .createQueryBuilder()
+          .update(QuestionPosition)
+          .set({
+            position: i,
+          })
+          .where('id = :id', { id: q.id })
+          .execute()
+          .then(() =>
+            console.log(`updated question ${q.id} to position ${i}`),
+          );
+      }
     }
   }
 }
