@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { RoundToQuestion } from 'src/round-to-question/entities/round-to-question.entity';
+import { QuestionPosition } from 'src/questionPosition/entities/question-position.entity';
 import { Trivia } from 'src/trivia/entities/trivia.entity';
 import {
   Column,
@@ -19,10 +19,15 @@ export class Round {
   @Column()
   position: number;
 
-  @ManyToOne(() => Trivia, (trivia) => trivia.rounds)
+  @ManyToOne(() => Trivia, (trivia) => trivia.rounds, {
+    cascade: true,
+  })
   trivia: Trivia;
 
-  @Field(() => [RoundToQuestion], { name: 'questions'})
-  @OneToMany(() => RoundToQuestion, (roundToQuestion) => roundToQuestion.round)
-  public roundToQuestion!: RoundToQuestion[];
+  @Field(() => [QuestionPosition], { name: 'questions' })
+  @OneToMany(
+    () => QuestionPosition,
+    (questionPosition) => questionPosition.round,
+  )
+  public questions!: QuestionPosition[];
 }

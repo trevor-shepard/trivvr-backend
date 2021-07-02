@@ -6,6 +6,7 @@ type User {
   id: Float!
   username: String!
   email: String!
+  trivias: [Trivia!]!
 }
 
 type Trivia {
@@ -18,13 +19,13 @@ type Trivia {
 
 type Round {
   position: Int!
-  questions: [RoundToQuestion!]!
+  questions: [QuestionPosition!]!
 }
 
-type RoundToQuestion {
+type QuestionPosition {
   position: Int!
-  question: [Question!]!
-  round: [Round!]!
+  question: Question!
+  round: Round!
 }
 
 type Question {
@@ -33,34 +34,49 @@ type Question {
 }
 
 type Query {
+  position(id: Int!): QuestionPosition!
   getAllUsersTrivia(id: Int!): [Trivia!]!
   trivia(id: Int!): Trivia!
-  roundToQuestion(id: Int!): RoundToQuestion!
 }
 
 type Mutation {
+  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  createQuestionPosition(createQuestionPositionInput: CreateQuestionPositionInput!): QuestionPosition!
+  updateQuestionPosition(updateQuestionPositionInput: UpdateQuestionPositionInput!): QuestionPosition!
+  removeQuestionPosition(id: Int!): QuestionPosition!
   createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
-  createRoundToQuestion(createRoundToQuestionInput: CreateRoundToQuestionInput!): RoundToQuestion!
-  updateRoundToQuestion(updateRoundToQuestionInput: UpdateRoundToQuestionInput!): RoundToQuestion!
-  removeRoundToQuestion(id: Int!): RoundToQuestion!
   createUser(createUserInput: CreateUserInput!): User!
+}
+
+input CreateQuestionInput {
+  """question"""
+  prompt: String!
+
+  """question"""
+  answer: String!
+
+  """id of round question belongs to"""
+  roundID: Int!
+
+  """position in the round"""
+  position: Int!
+}
+
+input CreateQuestionPositionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateQuestionPositionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input CreateTriviaInput {
   """name of trivia"""
   name: String!
   userID: Int!
-}
-
-input CreateRoundToQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateRoundToQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 input CreateUserInput {

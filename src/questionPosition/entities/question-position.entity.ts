@@ -5,23 +5,27 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
-export class RoundToQuestion {
+export class QuestionPosition {
   @PrimaryGeneratedColumn()
-  public roundToQuestionId!: number;
+  public positionId!: number;
 
   @Field(() => Int)
   @Column()
   public position!: number;
 
-  @Field(() => [Question])
-  @ManyToOne(() => Question, (question) => question.roundToQuestion, {
+  @Field(() => Question)
+  @ManyToOne(() => Question, (question) => question.position, {
     cascade: true,
+    onDelete: 'SET NULL',
+    eager: true,
   })
   public question!: Question;
 
-  @Field(() => [Round])
-  @ManyToOne(() => Round, (round) => round.roundToQuestion, {
+  @Field(() => Round)
+  @ManyToOne(() => Round, (round) => round.position, {
     cascade: true,
+    onDelete: 'SET NULL',
+    eager: true,
   })
   public round!: Round;
 }

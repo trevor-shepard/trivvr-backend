@@ -8,12 +8,12 @@ import { UpdateQuestionInput } from './dto/update-question.input';
 export class QuestionResolver {
   constructor(private readonly questionService: QuestionService) {}
 
-  // @Mutation(() => Question)
-  // createQuestion(
-  //   @Args('createQuestionInput') createQuestionInput: CreateQuestionInput,
-  // ) {
-  //   return this.questionService.create(createQuestionInput);
-  // }
+  @Mutation(() => Question)
+  createQuestion(
+    @Args('createQuestionInput') createQuestionInput: CreateQuestionInput,
+  ) {
+    return this.questionService.create(createQuestionInput);
+  }
 
   // @Query(() => [Question], { name: 'question' })
   // findAll() {

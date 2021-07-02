@@ -11,7 +11,7 @@ export class TriviaResolver {
   @Query(() => [Trivia])
   getAllUsersTrivia(@Args('id', { type: () => Int }) id: number) {
     try {
-      return this.triviaService.findAllUsersTrivia(id);
+      return this.triviaService.findTriviasByUser(id);
     } catch (error) {
       console.log('error', error);
     }

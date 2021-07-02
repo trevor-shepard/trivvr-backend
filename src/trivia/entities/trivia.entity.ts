@@ -4,7 +4,6 @@ import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -30,7 +29,6 @@ export class Trivia {
   rounds: Round[];
 
   @Field(() => [User])
-  @ManyToMany(() => User, (user) => user.trivias)
-  @JoinTable()
+  @ManyToMany(() => User, (user) => user.trivias, { eager: true })
   admins: User[];
 }

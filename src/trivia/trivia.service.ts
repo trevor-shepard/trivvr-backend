@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateTriviaInput } from './dto/create-trivia.input';
-import { UpdateTriviaInput } from './dto/update-trivia.input';
 import { Trivia } from './entities/trivia.entity';
 
 @Injectable()
@@ -20,13 +19,10 @@ export class TriviaService {
 
     if (!user) throw Error('user not found');
 
-    console.log('user', user);
-
     const trivia = this.triviaRepo.create({
       name,
       game_status: 'incomplete',
     });
-    console.log('trivia');
 
     trivia.admins = [user];
 
@@ -35,26 +31,24 @@ export class TriviaService {
     return trivia;
   }
 
-  async findAllUsersTrivia(userID: number) {
-    const user = await this.userRepo
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.trivias', 'trivia')
-      .where('user.id = :id', { id: userID })
-      .getOne();
-
-    if (!user) throw Error('user not found');
+  async findTriviasByUser(userID: number) {
+    const user = await this.userRepo.findOneOrFail(userID, {
+      relations: ['trivias'],
+    });
 
     return user.trivias;
   }
 
   async findOne(id: number) {
-    return await this.triviaRepo.findOne(id, {
-      relations: [
-        'rounds',
-        'rounds.roundToQuestion',
-        'rounds.roundToQuestion.question',
-      ],
+    const trivia = await this.triviaRepo.findOne(id, {
+      relations: ['rounds', 'rounds.questions'],
     });
+
+    console.log('fetch trivia', trivia);
+
+    console.log('questions', trivia.rounds[0].questions);
+
+    return trivia;
   }
 
   // update(id: number, updateTriviaInput: UpdateTriviaInput) {

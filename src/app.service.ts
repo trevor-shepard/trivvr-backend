@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Question } from './question/entities/question.entity';
-import { RoundToQuestion } from './round-to-question/entities/round-to-question.entity';
+import { QuestionPosition } from './questionPosition/entities/question-position.entity';
 import { Round } from './round/entities/round.entity';
 import { Trivia } from './trivia/entities/trivia.entity';
 import { User } from './user/entities/user.entity';
@@ -13,8 +13,8 @@ export class AppService {
     @InjectRepository(Question) private questionRepo: Repository<Question>,
     @InjectRepository(Trivia) private triviaRepo: Repository<Trivia>,
     @InjectRepository(Round) private roundRepo: Repository<Round>,
-    @InjectRepository(RoundToQuestion)
-    private roundToQuestionRepo: Repository<RoundToQuestion>,
+    @InjectRepository(QuestionPosition)
+    private positionRepo: Repository<QuestionPosition>,
     @InjectRepository(User) private userRepo: Repository<User>,
   ) {}
 
@@ -27,7 +27,7 @@ export class AppService {
 
   //   for (const roundIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
   //     const round = this.roundRepo.create({ position: roundIndex });
-  //     const roundToQuestions = [];
+  //     const positions = [];
   //     for (const questionIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
   //       const prompt = `What is ${roundIndex} + ${questionIndex}`;
   //       const answer = `${roundIndex + questionIndex}`;
@@ -36,7 +36,7 @@ export class AppService {
   //         answer,
   //       });
 
-  //       const roundToQuestion = await this.roundToQuestionRepo.create({
+  //       const position = await this.positionRepo.create({
   //         position: questionIndex,
   //         question,
   //         round,
@@ -44,10 +44,10 @@ export class AppService {
 
   //       await this.questionRepo.save(question);
 
-  //       await this.roundToQuestionRepo.save(roundToQuestion);
+  //       await this.positionRepo.save(position);
   //     }
 
-  //     round.roundToQuestion = roundToQuestions;
+  //     round.position = positions;
 
   //     await this.roundRepo.save(round);
   //     rounds.push(round);
@@ -61,10 +61,45 @@ export class AppService {
   async createUser() {
     const user = this.userRepo.create({
       username: 'hi',
-      email: 't@a.com',
+      email: 't@c.com',
     });
 
     await this.userRepo.save(user);
+
+    const trivia = this.triviaRepo.create({
+      name: 'seeded trivia',
+      game_status: 'incomplete',
+    });
+
+    trivia.admins = [user];
+
+    await this.triviaRepo.save(trivia);
+
+    for (const roundIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+      const round = this.roundRepo.create({ position: roundIndex, trivia });
+      await this.roundRepo.save(round);
+
+      for (const questionIndex of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+        const prompt = `What is ${roundIndex} + ${questionIndex}`;
+        const answer = `${roundIndex + questionIndex}`;
+        const question = await this.questionRepo.create({
+          prompt,
+          answer,
+        });
+
+        await this.questionRepo.save(question);
+
+        const position = await this.positionRepo.create({
+          position: questionIndex,
+          question,
+          round,
+        });
+
+        await this.positionRepo.save(position);
+      }
+
+      await this.roundRepo.save(round);
+    }
   }
 
   // getHello(): string {

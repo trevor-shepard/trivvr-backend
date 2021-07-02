@@ -25,7 +25,11 @@ export class User {
   @Column()
   email: string;
 
-  @ManyToMany(() => Trivia, (trivia) => trivia.admins, { cascade: true })
+  @Field(() => [Trivia])
+  @ManyToMany(() => Trivia, (trivia) => trivia.admins, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
   @JoinTable()
   trivias: Trivia[];
 }
