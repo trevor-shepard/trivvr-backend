@@ -69,9 +69,7 @@ export class QuestionService {
           })
           .where('id = :id', { id: q.id })
           .execute()
-          .then(() =>
-            console.log(`updated question ${q.id} to position ${i}`),
-          );
+          .then(() => console.log(`updated question ${q.id} to position ${i}`));
       }
     }
   }

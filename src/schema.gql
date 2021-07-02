@@ -45,6 +45,7 @@ type Mutation {
   updateQuestionPosition(updateQuestionPositionInput: UpdateQuestionPositionInput!): QuestionPosition!
   removeQuestionPosition(id: Int!): QuestionPosition!
   createTrivia(createTriviaInput: CreateTriviaInput!): Trivia!
+  addRound(addRoundInput: AddRoundInput!): Trivia!
   createUser(createUserInput: CreateUserInput!): User!
 }
 
@@ -77,6 +78,11 @@ input CreateTriviaInput {
   """name of trivia"""
   name: String!
   userID: Int!
+}
+
+input AddRoundInput {
+  """add a round to trivia"""
+  triviaID: Int!
 }
 
 input CreateUserInput {
