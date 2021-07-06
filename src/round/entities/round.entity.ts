@@ -12,6 +12,7 @@ import {
 @Entity()
 @ObjectType()
 export class Round {
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 

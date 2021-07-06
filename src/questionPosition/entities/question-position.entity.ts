@@ -6,6 +6,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 @Entity()
 @ObjectType()
 export class QuestionPosition {
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   public id!: number;
 

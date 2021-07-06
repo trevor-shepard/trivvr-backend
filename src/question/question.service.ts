@@ -4,6 +4,7 @@ import { QuestionPosition } from 'src/questionPosition/entities/question-positio
 import { Round } from 'src/round/entities/round.entity';
 import { Repository } from 'typeorm';
 import { CreateQuestionInput } from './dto/create-question.input';
+import { DeleteQuestionInput } from './dto/delete-question.input';
 import { Question } from './entities/question.entity';
 // import { UpdateQuestionInput } from './dto/update-question.input';
 
@@ -15,6 +16,7 @@ export class QuestionService {
     @InjectRepository(QuestionPosition)
     private questionPositionRepo: Repository<QuestionPosition>,
   ) {}
+
   async create({ prompt, answer, position, roundID }: CreateQuestionInput) {
     const question = this.questionRepo.create({
       prompt,
@@ -28,6 +30,40 @@ export class QuestionService {
     return question;
   }
 
+  async delete({ positionID }: DeleteQuestionInput) {
+    const questionPosition = await this.questionPositionRepo.findOneOrFail(
+      positionID,
+    );
+
+    const { round } = questionPosition;
+
+    await this.questionPositionRepo.remove(questionPosition);
+
+    await this.formatPosition(round.id);
+
+    return questionPosition;
+  }
+
+  private async formatPosition(roundID: number) {
+    const round = await this.roundRepo.findOne(roundID, {
+      relations: ['questions'],
+    });
+
+    console.log('round', round);
+
+    for (const [i, q] of round.questions.entries()) {
+      await this.questionPositionRepo
+        .createQueryBuilder()
+        .update(QuestionPosition)
+        .set({
+          position: i,
+        })
+        .where('id = :id', { id: q.id })
+        .execute()
+        .then(() => console.log(`updated question ${q.id} to position ${i}`));
+    }
+  }
+
   private async insertQuestion(
     question: Question,
     roundID: number,
@@ -38,8 +74,6 @@ export class QuestionService {
     });
 
     const { questions } = round;
-
-    console.log(questions)
 
     if (position >= questions.length) {
       console.log('appending question to the end');

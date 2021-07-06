@@ -18,17 +18,20 @@ type Trivia {
 }
 
 type Round {
+  id: Int!
   position: Int!
   questions: [QuestionPosition!]!
 }
 
 type QuestionPosition {
+  id: Int!
   position: Int!
   question: Question!
   round: Round!
 }
 
 type Question {
+  id: Int!
   prompt: String!
   answer: String!
 }
@@ -41,6 +44,7 @@ type Query {
 
 type Mutation {
   createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  deleteQuestion(deleteQuestionInput: DeleteQuestionInput!): QuestionPosition!
   createQuestionPosition(createQuestionPositionInput: CreateQuestionPositionInput!): QuestionPosition!
   updateQuestionPosition(updateQuestionPositionInput: UpdateQuestionPositionInput!): QuestionPosition!
   removeQuestionPosition(id: Int!): QuestionPosition!
@@ -61,6 +65,11 @@ input CreateQuestionInput {
 
   """position in the round"""
   position: Int!
+}
+
+input DeleteQuestionInput {
+  """id of the of the question position"""
+  positionID: Int!
 }
 
 input CreateQuestionPositionInput {
