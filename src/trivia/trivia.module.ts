@@ -12,16 +12,26 @@ import { User } from 'src/user/entities/user.entity';
 import { UserModule } from 'src/user/user.module';
 import { QuestionPosition } from 'src/questionPosition/entities/question-position.entity';
 import { QuestionPositionModule } from 'src/questionPosition/question-position.module';
+import { TeamModule } from 'src/team/team.module';
+import { Team } from 'src/team/entities/team.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(config),
-    TypeOrmModule.forFeature([Question, Trivia, Round, QuestionPosition, User]),
+    TypeOrmModule.forFeature([
+      Question,
+      Trivia,
+      Round,
+      QuestionPosition,
+      User,
+      Team,
+    ]),
     QuestionModule,
     TriviaModule,
     RoundModule,
     QuestionPositionModule,
     UserModule,
+    TeamModule,
   ],
   providers: [TriviaResolver, TriviaService],
 })

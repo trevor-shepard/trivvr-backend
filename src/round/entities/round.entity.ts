@@ -31,4 +31,8 @@ export class Round {
     (questionPosition) => questionPosition.round,
   )
   public questions!: QuestionPosition[];
+
+  @Field()
+  @Column({ default: 'standard' })
+  type: 'standard' | 'bonus' | 'music';
 }

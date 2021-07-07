@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Round } from 'src/round/entities/round.entity';
+import { Team } from 'src/team/entities/team.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -31,4 +32,9 @@ export class Trivia {
   @Field(() => [User])
   @ManyToMany(() => User, (user) => user.trivias, { eager: true })
   admins: User[];
+
+  @Field(() => [Team])
+  @OneToMany(() => Team, (team) => team.trivia, { eager: true })
+  teams: Team[];
+
 }

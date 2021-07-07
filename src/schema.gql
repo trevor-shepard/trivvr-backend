@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Team {
+  id: Float!
+  name: String!
+}
+
 type User {
   id: Float!
   username: String!
@@ -15,12 +20,14 @@ type Trivia {
   game_status: String!
   rounds: [Round!]!
   admins: [User!]!
+  teams: [Team!]!
 }
 
 type Round {
   id: Int!
   position: Int!
   questions: [QuestionPosition!]!
+  type: String!
 }
 
 type QuestionPosition {

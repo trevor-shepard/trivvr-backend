@@ -15,6 +15,7 @@ import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { QuestionPosition } from './questionPosition/entities/question-position.entity';
 import { QuestionPositionModule } from './questionPosition/question-position.module';
+import { TeamModule } from './team/team.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { QuestionPositionModule } from './questionPosition/question-position.mod
     RoundModule,
     QuestionPositionModule,
     UserModule,
+    TeamModule,
   ],
   controllers: [AppController],
   providers: [AppService],
