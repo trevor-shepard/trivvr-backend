@@ -1,6 +1,7 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field,  } from '@nestjs/graphql';
 import { Trivia } from 'src/trivia/entities/trivia.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import JSON from 'graphql-type-json';
 
 @Entity()
 @ObjectType()
@@ -18,7 +19,11 @@ export class Team {
   })
   trivia: Trivia;
 
-  // @Field()
-  // @Column()
-  // scores: number[];
+  @Field(() => JSON)
+  @Column('json')
+  scores: number[];
+
+  @Field(() => JSON)
+  @Column('json')
+  responses: string[][];
 }
