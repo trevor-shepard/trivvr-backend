@@ -3,6 +3,8 @@ import { TriviaService } from './trivia.service';
 import { Trivia } from './entities/trivia.entity';
 import { CreateTriviaInput } from './dto/create-trivia.input';
 import { AddRoundInput } from './dto/add-round.input';
+import { StartTriviaInput } from './dto/start-trivia.input';
+import { JoinTeamInput } from './dto/join-team.input';
 
 @Resolver(() => Trivia)
 export class TriviaResolver {
@@ -31,5 +33,15 @@ export class TriviaResolver {
   @Mutation(() => Trivia)
   addRound(@Args('addRoundInput') addRoundInput: AddRoundInput) {
     return this.triviaService.addRound(addRoundInput);
+  }
+
+  @Mutation(() => Trivia)
+  startTrivia(@Args('startTriviaInput') startTriviaInput: StartTriviaInput) {
+    return this.triviaService.startTrivia(startTriviaInput);
+  }
+
+  @Mutation(() => Trivia)
+  joinTeam(@Args('joinTeamInput') joinTeamInput: JoinTeamInput) {
+    return this.triviaService.joinTeam(joinTeamInput);
   }
 }

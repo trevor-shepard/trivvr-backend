@@ -1,4 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { randomInt } from 'crypto';
 import { Round } from 'src/round/entities/round.entity';
 import { Team } from 'src/team/entities/team.entity';
@@ -26,9 +26,13 @@ export class Trivia {
   @Column()
   join_code: string;
 
+  @Field(() => Int)
+  @Column({ default: 0 })
+  current_round: number;
+
   @Field()
-  @Column()
-  game_status: 'incomplete' | 'complete' | 'started' | 'finished';
+  @Column({ default: 'incomplete' })
+  game_status: 'incomplete' | 'ready' | 'started' | 'finished';
 
   @Field(() => [Round])
   @OneToMany(() => Round, (round) => round.trivia)

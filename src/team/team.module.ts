@@ -3,6 +3,6 @@ import { TeamService } from './team.service';
 import { TeamResolver } from './team.resolver';
 
 @Module({
-  providers: [TeamResolver, TeamService]
+  providers: [TeamResolver, TeamService],
 })
 export class TeamModule {}

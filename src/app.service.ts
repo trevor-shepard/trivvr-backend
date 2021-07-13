@@ -59,9 +59,9 @@ export class AppService {
   // }
 
   async createUser() {
-    const user = this.userRepo.create({
-      username: 'hi',
-      email: 't@c.com',
+    const user = await this.userRepo.create({
+      username: 'timbo',
+      email: 't@a.com',
     });
 
     await this.userRepo.save(user);
@@ -69,6 +69,7 @@ export class AppService {
     const trivia = this.triviaRepo.create({
       name: 'seeded trivia',
       game_status: 'incomplete',
+      join_code: 'asdfasdfaecease',
     });
 
     trivia.admins = [user];
